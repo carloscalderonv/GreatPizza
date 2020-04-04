@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GreatPizzaAPI.Domains;
 
 namespace GreatPizzaAPI.Data
 {
@@ -12,5 +13,8 @@ namespace GreatPizzaAPI.Data
             : base(options)
         {
         }
+        public DbSet<Pizza> Pizza { get; set; }
+        public DbSet<Topping> Topping { get; set; }
+        public DbSet<ToppingPizza> ToppingPizza { get; set; }
     }
 }
