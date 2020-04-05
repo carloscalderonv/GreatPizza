@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using GreatPizzaAPI.Services;
 namespace GreatPizzaAPI.Installers
 {
     public class DbInstaller : IInstaller
@@ -13,6 +14,8 @@ namespace GreatPizzaAPI.Installers
                     configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<Data.DataContext>();
+            services.AddScoped<IPizzaService, PizzaService>();
+            services.AddScoped<IToppingService, ToppingService>();
         }
     }
 }
