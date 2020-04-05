@@ -83,6 +83,11 @@ namespace GreatPizzaAPI.Controllers.V1
         [HttpPost(ApiRoutes.Pizza.AddTopping)]
         public async Task<IActionResult> AddTopping([FromRoute] Guid pizzaId, [FromRoute] Guid toppingId)
         {
+            var toppingpizza = await _pizzaService.GetToppingPizzaAsync(pizzaId, toppingId);
+            if (toppingpizza != null)
+            {
+                return Conflict();
+            }
             var newToppingPizzaId = Guid.NewGuid();
             var toppingPizza = new ToppingPizza
             {
