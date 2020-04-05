@@ -7,6 +7,9 @@ import { PizzaComponent } from './pages/pizza/pizza.component';
 import { PizzasComponent } from './pages/pizza/pizzas.component';
 import { ToppingComponent } from './pages/topping/topping.component';
 import { ToppingsComponent } from './pages/topping/toppings.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { ToppingsComponent } from './pages/topping/toppings.component';
     PizzaComponent,
     PizzasComponent,
     ToppingComponent,
-    ToppingsComponent
+    ToppingsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
