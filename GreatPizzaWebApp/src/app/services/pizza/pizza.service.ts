@@ -15,7 +15,6 @@ export class PizzaService {
     const url = '/api/pizza/';
     return this.httpClient.get(url).pipe(
       map((resp: any) => {
-        console.log(resp);
         let pizzas: Pizza[];
         pizzas = [];
         for (let i = 0; i < (resp as Array<any>).length; i++) {
@@ -31,7 +30,7 @@ export class PizzaService {
     );
   }
 
-  get( id: number ) {
+  get( id: string ) {
     const url = '/api/pizza/' + id;
     return this.httpClient.get(url).pipe(
       map((resp: any) => {
@@ -65,7 +64,12 @@ export class PizzaService {
         .put(url, pizza)
         .pipe(
           map((resp: any) => {
-            return resp;
+            let pizza: Pizza;
+            pizza = new Pizza();
+            pizza.Id = (resp as any).id;
+            pizza.Name = (resp as any).name;
+            pizza.Description = (resp as any).description;
+            return pizza;
           })
         );
     } else {
@@ -74,7 +78,12 @@ export class PizzaService {
         .post(url, pizza )
         .pipe(
           map((resp: any) => {
-            return resp;
+            let pizza: Pizza;
+            pizza = new Pizza();
+            pizza.Id = (resp as any).id;
+            pizza.Name = (resp as any).name;
+            pizza.Description = (resp as any).description;
+            return pizza;
           })
         );
     }

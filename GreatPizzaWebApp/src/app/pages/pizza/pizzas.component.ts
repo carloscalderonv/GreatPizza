@@ -21,7 +21,6 @@ export class PizzasComponent implements OnInit {
     this.pizzaService
     .getAll()
     .subscribe(pizzas => {
-      console.log(pizzas);
       this.pizzas = pizzas;
       this.loading = false;
     });
