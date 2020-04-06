@@ -3,15 +3,6 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="text-right">
-          <button
-            [routerLink]="['/topping', 'new']"
-            type="button"
-            class="btn waves-effect waves-light btn-rounded btn-primary"
-          >
-            Create Topping
-          </button>
-        </div>
         <h3 class="card-title">
           Total of Toppings ( <small> {{ toppings.length }} </small> )
         </h3>
@@ -34,15 +25,8 @@
                 {{ topping.Name }}
               </td>
               <td>
-                <button
-                  [routerLink]="['/topping', topping.Id]"
-                  class="btn btn-primary"
-                >
-                  Edit
-                </button>
-
-                <button (click)="delete(topping)" class="btn btn-secondary">
-                  Delete
+                <button (click)="remove(topping)" class="btn btn-secondary">
+                  remove
                 </button>
               </td>
             </tr>
@@ -51,6 +35,23 @@
         <pagination-controls
           (pageChange)="page = $event"
         ></pagination-controls>
+        <h3 class="card-title">
+            Add Topping to Pizza
+        </h3>
+        <div class="form-group">
+            <label>Topping</label>
+            <div class="input-group">
+            <select [(ngModel)]="idToppingToAdd" name="idToppingToAdd" class="form-control" required>
+              <option [ngValue]="undefined" disabled selected>Select Topping</option>
+              <option *ngFor="let availableTopping of availableToppings" [value]="availableTopping.Id">
+                {{ availableTopping.Name }}
+              </option>
+            </select>
+            <button type="button" (click)="add(idToppingToAdd)" class="btn btn-primary ml-2">
+                Add
+              </button>
+            </div>
+        </div>
       </div>
     </div>
   </div>

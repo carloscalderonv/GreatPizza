@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToppingPizzaComponent } from './pages/pizza/topping-pizza.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PizzasComponent,
     ToppingComponent,
     ToppingsComponent,
-    LoadingComponent
+    LoadingComponent,
+    ToppingPizzaComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

@@ -88,4 +88,24 @@ export class PizzaService {
         );
     }
   }
+  addTopping(idPizza:string, idTopping:string){
+    const url = '/api/pizza/Topping/' + idPizza+ '/'+idTopping;
+    return this.httpClient
+    .post(url, {} )
+    .pipe(
+      map((resp: any) => {
+        resp
+      })
+    );
+  }
+  removeTopping(idPizza:string, idTopping:string){
+    const url = '/api/pizza/Topping/' + idPizza+ '/'+idTopping;
+    return this.httpClient
+      .delete(url)
+      .pipe(
+        map(resp => {
+          return resp;
+        })
+      );
+  }
 }

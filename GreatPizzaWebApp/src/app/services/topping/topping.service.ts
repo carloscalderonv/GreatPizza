@@ -84,4 +84,38 @@ export class ToppingService {
         );
     }
   }
+  GetAllByPizza(IdPizza) {
+    const url = '/api/topping/by-pizza/'+IdPizza;
+    return this.httpClient.get(url).pipe(
+      map((resp: any) => {
+        let toppings: Topping[];
+        toppings = [];
+        for (let i = 0; i < (resp as Array<any>).length; i++) {
+          let topping: Topping;
+          topping = new Topping();
+          topping.Id = (resp as Array<any>)[i].id;
+          topping.Name = (resp as Array<any>)[i].name;
+          toppings.push(topping);
+        }
+        return toppings;
+        })
+    );
+  }
+  GetAllAvailableByPizza(IdPizza) {
+    const url = '/api/topping/available-by-pizza/'+IdPizza;
+    return this.httpClient.get(url).pipe(
+      map((resp: any) => {
+        let toppings: Topping[];
+        toppings = [];
+        for (let i = 0; i < (resp as Array<any>).length; i++) {
+          let topping: Topping;
+          topping = new Topping();
+          topping.Id = (resp as Array<any>)[i].id;
+          topping.Name = (resp as Array<any>)[i].name;
+          toppings.push(topping);
+        }
+        return toppings;
+        })
+    );
+  }
 }
