@@ -1,1 +1,58 @@
-<p>toppings works!</p>
+<app-loading *ngIf="loading"></app-loading>
+<div class="rowanimated fadeIn" *ngIf="!loading">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          <button
+            [routerLink]="['/topping', 'new']"
+            type="button"
+            class="btn waves-effect waves-light btn-rounded btn-primary"
+          >
+            Create Topping
+          </button>
+        </div>
+        <h3 class="card-title">
+          Total of Toppings ( <small> {{ toppings.length }} </small> )
+        </h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let topping of toppings
+                  | paginate: { itemsPerPage: 10, currentPage: page }
+              "
+            >
+              <td>
+                {{ topping.Name }}
+              </td>
+              <td>
+                <button
+                  [routerLink]="['/topping', topping.Id]"
+                  class="btn btn-primary"
+                >
+                  Edit
+                </button>
+
+                <button (click)="delete(topping)" class="btn btn-secondary">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls
+          (pageChange)="page = $event"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

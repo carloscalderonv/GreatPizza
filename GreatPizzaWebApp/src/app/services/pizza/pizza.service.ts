@@ -58,7 +58,7 @@ export class PizzaService {
   save(pizza: Pizza) {
     const url = '/api/pizza/' + (pizza.Id || '');
     if (pizza.Id) {
-      // actualizando
+      // updating
 
       return this.httpClient
         .put(url, pizza)
@@ -73,7 +73,7 @@ export class PizzaService {
           })
         );
     } else {
-      // creando
+      // creating
       return this.httpClient
         .post(url, pizza )
         .pipe(
