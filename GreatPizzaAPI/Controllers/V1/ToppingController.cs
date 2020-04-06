@@ -76,5 +76,16 @@ namespace GreatPizzaAPI.Controllers.V1
             return NotFound();
         }
 
+        [HttpGet(ApiRoutes.Topping.GetAllByPizzaId)]
+        public async Task<IActionResult> GetAllByPizzaId([FromRoute] Guid pizzaId)
+        {
+            return Ok(await _toppingService.GetAllByPizzaId(pizzaId));
+        }
+
+        [HttpGet(ApiRoutes.Topping.GetAllAvailableByPizzaId)]
+        public async Task<IActionResult> GetAllAvailableByPizzaId([FromRoute] Guid pizzaId)
+        {
+            return Ok(await _toppingService.GetAllAvailableByPizzaId(pizzaId));
+        }
     }
 }

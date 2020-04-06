@@ -40,6 +40,24 @@ namespace GreatPizzaAPI.Services
             return await _dataContext.Topping.ToListAsync();
         }
 
+        public async Task<List<Topping>> GetAllAvailableByPizzaId(Guid pizzaId)
+        {
+            var toppingsIds = _dataContext.ToppingPizza.Where(p => p.PizzaId == pizzaId).Select(tp => tp.ToppingId).ToArray();
+
+            var query = _dataContext.Topping.Where(p => !toppingsIds.Contains(p.Id));
+            
+            return await query.ToListAsync();
+        }
+
+        public async Task<List<Topping>> GetAllByPizzaId(Guid pizzaId)
+        {
+            var query = from tp in _dataContext.ToppingPizza
+                        join t in _dataContext.Topping on tp.ToppingId equals t.Id
+                        where tp.PizzaId==pizzaId 
+                        select t;
+            return await query.ToListAsync();
+        }
+
         public async Task<Topping> GetByIdAsync(Guid toppingId)
         {
             return await _dataContext.Topping.SingleOrDefaultAsync(topping => topping.Id == toppingId);

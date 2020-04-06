@@ -27,6 +27,9 @@ namespace GreatPizzaAPI.Contracts
             public const string Update = Base + "/topping/{toppingId}";
             public const string Delete = Base + "/topping/{toppingId}";
             public const string Create = Base + "/topping";
+            public const string GetAllByPizzaId = Base + "/topping/by-pizza/{pizzaId}";
+            public const string GetAllAvailableByPizzaId = Base + "/topping/available-by-pizza/{pizzaId}";
+
         }
     }
 }
