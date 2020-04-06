@@ -9,6 +9,7 @@ using GreatPizzaAPI.Contracts.V1.Requests;
 using GreatPizzaAPI.Domains;
 namespace GreatPizzaAPI.Controllers.V1
 {
+    [Produces("application/json")]
     public class PizzaController : Controller
     {
         private readonly IPizzaService _pizzaService;
@@ -19,13 +20,20 @@ namespace GreatPizzaAPI.Controllers.V1
             _pizzaService = pizzaService;
             _uriService = uriService;
         }
-
+        /// <summary>
+        /// Return all Pizzas
+        /// </summary> 
+        /// <response code="200">Return all Pizzas</response>
         [HttpGet(ApiRoutes.Pizza.GetAll)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _pizzaService.GetAllAsync());
         }
 
+        /// <summary>
+        /// Return a Pizzas based on the ID
+        /// </summary> 
+        /// <response code="200">Return the selected Pizza</response>
         [HttpGet(ApiRoutes.Pizza.Get)]
         public async Task<IActionResult> Get([FromRoute]Guid pizzaId)
         {
@@ -37,6 +45,10 @@ namespace GreatPizzaAPI.Controllers.V1
             return Ok(pizza);
         }
 
+        /// <summary>
+        /// Create a pizza from data provided
+        /// </summary> 
+        /// <response code="201">Pizza was created successfully</response>
         [HttpPost(ApiRoutes.Pizza.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePizzaRequest createPizzaRequest)
         {
@@ -54,6 +66,11 @@ namespace GreatPizzaAPI.Controllers.V1
             return Created(locationUri, pizza);
         }
 
+        /// <summary>
+        /// Update a especific Pizza 
+        /// </summary> 
+        /// <response code="200">Pizza was updated successfully</response>
+        /// <response code="404">Pizza was not found in the system</response>
         [HttpPut(ApiRoutes.Pizza.Update)]
         public async Task<IActionResult> Update([FromRoute]Guid pizzaId, [FromBody] UpdatePizzaRequest request)
         {
@@ -69,6 +86,11 @@ namespace GreatPizzaAPI.Controllers.V1
             return NotFound();
         }
 
+        /// <summary>
+        /// Delete a Pizza 
+        /// </summary> 
+        /// <response code="204">Pizza was deleted successfully</response>
+        /// <response code="404">Pizza was not found in the system</response>
         [HttpDelete(ApiRoutes.Pizza.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid pizzaId)
         {
@@ -80,6 +102,11 @@ namespace GreatPizzaAPI.Controllers.V1
             return NotFound();
         }
 
+        /// <summary>
+        /// Add a topping to a Pizza 
+        /// </summary> 
+        /// <response code="201">Topping was added to pizza successfully</response>
+        /// <response code="409">Topping already exists on the Pizza</response>
         [HttpPost(ApiRoutes.Pizza.AddTopping)]
         public async Task<IActionResult> AddTopping([FromRoute] Guid pizzaId, [FromRoute] Guid toppingId)
         {
@@ -102,6 +129,11 @@ namespace GreatPizzaAPI.Controllers.V1
             return Created(locationUri, toppingPizza);
         }
 
+        /// <summary>
+        /// Remove a topping from the Pizza 
+        /// </summary> 
+        /// <response code="204">Topping was removed from pizza successfully</response>
+        /// <response code="404">Topping did not exists on the Pizza</response>
         [HttpDelete(ApiRoutes.Pizza.RemoveTopping)]
         public async Task<IActionResult> RemoveTopping([FromRoute] Guid pizzaId, [FromRoute] Guid toppingId)
         {

@@ -8,6 +8,7 @@ using GreatPizzaAPI.Domains;
 
 namespace GreatPizzaAPI.Controllers.V1
 {
+    [Produces("application/json")]
     public class ToppingController : Controller
     {
         private readonly IToppingService _toppingService;
