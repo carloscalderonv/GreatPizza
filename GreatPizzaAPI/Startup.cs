@@ -21,6 +21,7 @@ namespace GreatPizzaAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //all services will be installed by method in Installers/InstallerExtensions.cs
             services.InstallServicesInAssembly(Configuration);
         }
 
