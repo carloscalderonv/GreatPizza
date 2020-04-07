@@ -13,8 +13,11 @@ namespace GreatPizzaAPI.Data
             : base(options)
         {
         }
+        
         public DbSet<Pizza> Pizza { get; set; }
+        
         public DbSet<Topping> Topping { get; set; }
+        
         public DbSet<ToppingPizza> ToppingPizza { get; set; }
     }
 }

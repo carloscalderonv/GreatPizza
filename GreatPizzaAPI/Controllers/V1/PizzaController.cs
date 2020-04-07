@@ -13,6 +13,7 @@ namespace GreatPizzaAPI.Controllers.V1
     public class PizzaController : Controller
     {
         private readonly IPizzaService _pizzaService;
+
         private readonly IUriService _uriService;
 
         public PizzaController(IPizzaService pizzaService, IUriService uriService)
@@ -20,6 +21,7 @@ namespace GreatPizzaAPI.Controllers.V1
             _pizzaService = pizzaService;
             _uriService = uriService;
         }
+
         /// <summary>
         /// Return all Pizzas
         /// </summary> 
@@ -38,10 +40,8 @@ namespace GreatPizzaAPI.Controllers.V1
         public async Task<IActionResult> Get([FromRoute]Guid pizzaId)
         {
             var pizza = await _pizzaService.GetByIdAsync(pizzaId);
-
             if (pizza == null)
                 return NotFound();
-
             return Ok(pizza);
         }
 
@@ -59,9 +59,7 @@ namespace GreatPizzaAPI.Controllers.V1
                 Name = createPizzaRequest.Name,
                 Description = createPizzaRequest.Description,
             };
-
             await _pizzaService.CreateAsync(pizza);
-
             var locationUri = _uriService.GetPizzaUri(pizza.Id.ToString());
             return Created(locationUri, pizza);
         }
@@ -77,12 +75,9 @@ namespace GreatPizzaAPI.Controllers.V1
             var pizza = await _pizzaService.GetByIdAsync(pizzaId);
             pizza.Name = request.Name;
             pizza.Description = request.Description;
-
             var updated = await _pizzaService.UpdateAsync(pizza);
-
             if (updated)
                 return Ok(pizza);
-
             return NotFound();
         }
 
@@ -95,10 +90,8 @@ namespace GreatPizzaAPI.Controllers.V1
         public async Task<IActionResult> Delete([FromRoute] Guid pizzaId)
         {
             var deleted = await _pizzaService.DeleteAsync(pizzaId);
-
             if (deleted)
                 return NoContent();
-
             return NotFound();
         }
 
@@ -122,9 +115,7 @@ namespace GreatPizzaAPI.Controllers.V1
                 PizzaId = pizzaId,
                 ToppingId = toppingId,
             };
-
             await _pizzaService.AddToppingAsync(toppingPizza);
-
             var locationUri = _uriService.GetPizzaUri(toppingPizza.Id.ToString());
             return Created(locationUri, toppingPizza);
         }
@@ -143,10 +134,8 @@ namespace GreatPizzaAPI.Controllers.V1
                 return NotFound();
             }
             var deleted = await _pizzaService.RemoveToppingAsync(toppingpizza.Id);
-
             if (deleted)
                 return NoContent();
-
             return NotFound();
         }
     }

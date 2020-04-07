@@ -8,6 +8,7 @@ namespace GreatPizzaAPI.Services
     public interface IUriService
     {
         Uri GetPizzaUri(string pizzaId);
+        
         Uri GetToppingUri(string toppingId);
     }
 }

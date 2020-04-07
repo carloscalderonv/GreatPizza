@@ -12,6 +12,7 @@ namespace GreatPizzaAPI.Services
     public class PizzaService : IPizzaService
     {
         private readonly DataContext _dataContext;
+        
         ILogger _logger;
         public PizzaService(DataContext dataContext, ILoggerFactory loggerFactory)
         {
@@ -54,10 +55,8 @@ namespace GreatPizzaAPI.Services
             try
             {
                 var pizza = await GetByIdAsync(pizzaId);
-
                 if (pizza == null)
                     return false;
-
                 _dataContext.Pizza.Remove(pizza);
                 var deleted = await _dataContext.SaveChangesAsync();
                 return deleted > 0;
@@ -100,10 +99,8 @@ namespace GreatPizzaAPI.Services
             try
             {
                 var toppingPizzatmp = await GetToppingPizzaByIdAsync(idToppingPizza);
-
                 if (toppingPizzatmp == null)
                     return false;
-
                 _dataContext.ToppingPizza.Remove(toppingPizzatmp);
                 var deleted = await _dataContext.SaveChangesAsync();
                 return deleted > 0;
@@ -129,6 +126,7 @@ namespace GreatPizzaAPI.Services
                 return false;
             }
         }
+
         public async Task<ToppingPizza> GetToppingPizzaAsync(Guid pizzaId, Guid toppingId)
         {
             try
@@ -141,6 +139,7 @@ namespace GreatPizzaAPI.Services
                 return new ToppingPizza();
             }
         }
+
         public async Task<ToppingPizza> GetToppingPizzaByIdAsync(Guid toppingPizzaId)
         {
             try
