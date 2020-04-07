@@ -5,69 +5,128 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GreatPizzaAPI.Data;
 using GreatPizzaAPI.Domains;
+using Microsoft.Extensions.Logging;
 
 namespace GreatPizzaAPI.Services
 {
     public class ToppingService : IToppingService
     {
         private readonly DataContext _dataContext;
+        ILogger _logger;
 
-        public ToppingService(DataContext dataContext)
+        public ToppingService(DataContext dataContext, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<PizzaService>();
             _dataContext = dataContext;
         }
         public async Task<bool> CreateAsync(Topping topping)
         {
-            await _dataContext.Topping.AddAsync(topping);
-            var created = await _dataContext.SaveChangesAsync();
-            return created > 0;
+            try
+            {
+                await _dataContext.Topping.AddAsync(topping);
+                var created = await _dataContext.SaveChangesAsync();
+                return created > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateAsync");
+                return false;
+            }
         }
 
         public async Task<bool> DeleteAsync(Guid toppingId)
         {
-            var topping = await GetByIdAsync(toppingId);
+            try
+            {
+                var topping = await GetByIdAsync(toppingId);
 
-            if (topping == null)
+                if (topping == null)
+                    return false;
+
+                _dataContext.Topping.Remove(topping);
+                var deleted = await _dataContext.SaveChangesAsync();
+                return deleted > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "DeleteAsync");
                 return false;
-
-            _dataContext.Topping.Remove(topping);
-            var deleted = await _dataContext.SaveChangesAsync();
-            return deleted > 0;
+            }
         }
 
         public async Task<List<Topping>> GetAllAsync()
         {
-            return await _dataContext.Topping.ToListAsync();
+            try
+            {
+                return await _dataContext.Topping.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetAllAsync");
+                return new List<Topping>();
+            }
         }
 
         public async Task<List<Topping>> GetAllAvailableByPizzaId(Guid pizzaId)
         {
-            var toppingsIds = _dataContext.ToppingPizza.Where(p => p.PizzaId == pizzaId).Select(tp => tp.ToppingId).ToArray();
+            try
+            {
+                var toppingsIds = _dataContext.ToppingPizza.Where(p => p.PizzaId == pizzaId).Select(tp => tp.ToppingId).ToArray();
 
-            var query = _dataContext.Topping.Where(p => !toppingsIds.Contains(p.Id));
+                var query = _dataContext.Topping.Where(p => !toppingsIds.Contains(p.Id));
             
-            return await query.ToListAsync();
+                return await query.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetAllAvailableByPizzaId");
+                return new List<Topping>();
+            }
         }
 
         public async Task<List<Topping>> GetAllByPizzaId(Guid pizzaId)
         {
-            var query = from tp in _dataContext.ToppingPizza
-                        join t in _dataContext.Topping on tp.ToppingId equals t.Id
-                        where tp.PizzaId==pizzaId 
-                        select t;
-            return await query.ToListAsync();
+            try
+            {
+                var query = from tp in _dataContext.ToppingPizza
+                            join t in _dataContext.Topping on tp.ToppingId equals t.Id
+                            where tp.PizzaId==pizzaId 
+                            select t;
+                return await query.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetAllByPizzaId");
+                return new List<Topping>();
+            }
         }
 
         public async Task<Topping> GetByIdAsync(Guid toppingId)
         {
-            return await _dataContext.Topping.SingleOrDefaultAsync(topping => topping.Id == toppingId);
+            try
+            {
+                return await _dataContext.Topping.SingleOrDefaultAsync(topping => topping.Id == toppingId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetByIdAsync");
+                return new Topping();
+            }
         }
 
         public async Task<bool> UpdateAsync(Topping toppingToUpdate)
         {
-            _dataContext.Topping.Update(toppingToUpdate);
-            var updated = await _dataContext.SaveChangesAsync();
-            return updated > 0;
+            try
+            {
+                _dataContext.Topping.Update(toppingToUpdate);
+                var updated = await _dataContext.SaveChangesAsync();
+                return updated > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateAsync");
+                return false;
+            }
         }
     }
 }

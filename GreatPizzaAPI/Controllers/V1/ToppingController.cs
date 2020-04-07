@@ -43,7 +43,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var topping = new Topping
             {
                 Id = newToppingId,
-                Name = createToppingRequest.Name,
+                Name = createToppingRequest.Name
             };
 
             await _toppingService.CreateAsync(topping);
