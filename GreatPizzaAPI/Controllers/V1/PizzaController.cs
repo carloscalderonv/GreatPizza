@@ -7,6 +7,8 @@ using GreatPizzaAPI.Services;
 using GreatPizzaAPI.Contracts;
 using GreatPizzaAPI.Contracts.V1.Requests;
 using GreatPizzaAPI.Domains;
+using Microsoft.Extensions.Logging;
+
 namespace GreatPizzaAPI.Controllers.V1
 {
     [Produces("application/json")]
@@ -16,8 +18,11 @@ namespace GreatPizzaAPI.Controllers.V1
 
         private readonly IUriService _uriService;
 
-        public PizzaController(IPizzaService pizzaService, IUriService uriService)
+        private ILogger _logger;
+        
+        public PizzaController(IPizzaService pizzaService, IUriService uriService, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<PizzaController>();
             _pizzaService = pizzaService;
             _uriService = uriService;
         }
@@ -41,7 +46,10 @@ namespace GreatPizzaAPI.Controllers.V1
         {
             var pizza = await _pizzaService.GetByIdAsync(pizzaId);
             if (pizza == null)
+            {
+                _logger.LogInformation(string.Format("{0}: Pizza not found with ID {1}", "PizzaController.Get", pizzaId));
                 return NotFound();
+            }
             return Ok(pizza);
         }
 
@@ -78,6 +86,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var updated = await _pizzaService.UpdateAsync(pizza);
             if (updated)
                 return Ok(pizza);
+            _logger.LogInformation(string.Format("{0}: Pizza not found with ID {1}", "PizzaController.Update", pizzaId));
             return NotFound();
         }
 
@@ -92,6 +101,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var deleted = await _pizzaService.DeleteAsync(pizzaId);
             if (deleted)
                 return NoContent();
+            _logger.LogInformation(string.Format("{0}: Pizza not found with ID {1}", "PizzaController.Delete", pizzaId));
             return NotFound();
         }
 
@@ -106,6 +116,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var toppingpizza = await _pizzaService.GetToppingPizzaAsync(pizzaId, toppingId);
             if (toppingpizza != null)
             {
+                _logger.LogInformation(string.Format("{0}: Duplicate Topping {2} for pizza {1} ", "PizzaController.AddTopping", pizzaId, toppingId));
                 return Conflict();
             }
             var newToppingPizzaId = Guid.NewGuid();
@@ -131,6 +142,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var toppingpizza = await _pizzaService.GetToppingPizzaAsync(pizzaId, toppingId);
             if (toppingpizza==null)
             {
+                _logger.LogInformation(string.Format("{0}: Topping {2} not found on Pizza for pizza {1}", "PizzaController.RemoveTopping", pizzaId, toppingId));
                 return NotFound();
             }
             var deleted = await _pizzaService.RemoveToppingAsync(toppingpizza.Id);

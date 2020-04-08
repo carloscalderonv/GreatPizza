@@ -5,6 +5,7 @@ using GreatPizzaAPI.Services;
 using GreatPizzaAPI.Contracts;
 using GreatPizzaAPI.Contracts.V1.Requests;
 using GreatPizzaAPI.Domains;
+using Microsoft.Extensions.Logging;
 
 namespace GreatPizzaAPI.Controllers.V1
 {
@@ -14,9 +15,12 @@ namespace GreatPizzaAPI.Controllers.V1
         private readonly IToppingService _toppingService;
 
         private readonly IUriService _uriService;
+        
+        private ILogger _logger;
 
-        public ToppingController(IToppingService toppingService, IUriService uriService)
+        public ToppingController(IToppingService toppingService, IUriService uriService, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<PizzaController>();
             _toppingService = toppingService;
             _uriService = uriService;
         }
@@ -32,7 +36,10 @@ namespace GreatPizzaAPI.Controllers.V1
         {
             var topping = await _toppingService.GetByIdAsync(toppingId);
             if (topping == null)
+            {
+                _logger.LogInformation(string.Format("{0}: Topping not found with ID {1}", "ToppingController.Get", toppingId));
                 return NotFound();
+            }
             return Ok(topping);
         }
 
@@ -58,6 +65,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var updated = await _toppingService.UpdateAsync(topping);
             if (updated)
                 return Ok(topping);
+            _logger.LogInformation(string.Format("{0}: Topping not found with ID {1}", "ToppingController.Update", toppingId));
             return NotFound();
         }
 
@@ -67,6 +75,7 @@ namespace GreatPizzaAPI.Controllers.V1
             var deleted = await _toppingService.DeleteAsync(toppingId);
             if (deleted)
                 return NoContent();
+            _logger.LogInformation(string.Format("{0}: Topping not found with ID {1}", "ToppingController.Delete", toppingId));
             return NotFound();
         }
 
