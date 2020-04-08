@@ -1,5 +1,5 @@
 ﻿using System;
-using GreatPizzaAPI.Contracts;
+using GreatPizza.Contracts;
 
 namespace GreatPizzaAPI.Services
 {

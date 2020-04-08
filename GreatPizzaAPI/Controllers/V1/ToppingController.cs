@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GreatPizzaAPI.Services;
-using GreatPizzaAPI.Contracts;
-using GreatPizzaAPI.Contracts.V1.Requests;
+using GreatPizza.Contracts;
+using GreatPizza.Contracts.V1.Requests;
 using GreatPizzaAPI.Domains;
 using Microsoft.Extensions.Logging;
 

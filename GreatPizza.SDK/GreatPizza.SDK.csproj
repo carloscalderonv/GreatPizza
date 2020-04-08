@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" Version="5.1.54" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GreatPizza.Contracts\GreatPizza.Contracts.csproj" />
+  </ItemGroup>
+</Project>

@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using GreatPizzaAPI.Contracts.V1.Requests;
+using GreatPizza.Contracts.V1.Requests;
 using GreatPizzaAPI.Data;
 using GreatPizzaAPI.Domains;
-using GreatPizzaAPI.Contracts;
+using GreatPizza.Contracts;
 using Newtonsoft.Json;
 
 namespace GreatPizzaAPI.Tests

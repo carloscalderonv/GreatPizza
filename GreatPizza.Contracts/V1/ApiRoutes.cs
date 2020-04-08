@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GreatPizzaAPI.Contracts
+namespace GreatPizza.Contracts
 {
     public static class ApiRoutes
     {

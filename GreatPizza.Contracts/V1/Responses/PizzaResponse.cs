@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GreatPizza.Contracts.V1.Responses
 {
-    class PizzaResponse
+    public class PizzaResponse
     {
         public Guid Id { get; set; }
 

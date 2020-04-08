@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreatPizzaAPI.Tests", "Grea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreatPizza.Contracts", "GreatPizza.Contracts\GreatPizza.Contracts.csproj", "{0ABF0A1D-A205-4C12-8F8C-9B182594AAB9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreatPizza.SDK", "GreatPizza.SDK\GreatPizza.SDK.csproj", "{B9F3731D-CEE8-4C16-9114-96F569892498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreatPizza.SDK.Sample", "GreatPizza.SDK.Sample\GreatPizza.SDK.Sample.csproj", "{D068360E-7488-4E2D-9FAD-BB0911614B07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{0ABF0A1D-A205-4C12-8F8C-9B182594AAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ABF0A1D-A205-4C12-8F8C-9B182594AAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ABF0A1D-A205-4C12-8F8C-9B182594AAB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9F3731D-CEE8-4C16-9114-96F569892498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9F3731D-CEE8-4C16-9114-96F569892498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9F3731D-CEE8-4C16-9114-96F569892498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9F3731D-CEE8-4C16-9114-96F569892498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D068360E-7488-4E2D-9FAD-BB0911614B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D068360E-7488-4E2D-9FAD-BB0911614B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D068360E-7488-4E2D-9FAD-BB0911614B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D068360E-7488-4E2D-9FAD-BB0911614B07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
