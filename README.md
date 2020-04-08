@@ -10,6 +10,23 @@ The project uses **SQL Server** as Database, connected throught **Entity Framewo
 
 For backend the project uses **dot net core** v 3.1, it is a WebAPI, the user needs to open the solution **GreatPizza.sln** then all NuGet packages needs to be restored, the project has 2 controllers (Pizza and topping),  all methods are documented with Swagger on [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html).
 
+## Note for Startup.cs
+
+For Service Configuration a folder named **installers** was created, in this folder was created an interface **IInstaller** and instances of IInstaller was included in the folder, after that in startup.cs a loop was created, this loop retrieves all instances of IInstaller and perform the instalation of services.
+
+# SDK
+
+This project allows to test Backend, it creates an interface (API) that calls Backend with Public Contracts.
+
+## Note for SDK
+
+For SDK was used **Refit** Library, this library allows to perform calls to API from an interface.
+
+# SDK Sample
+
+This project shows how SDK should be called from Console Application, it calls all basic methods from API and allows to debug the results.
+
+
 # Frontend
 
 Frontend was created on **Angular 9**, it has a structure for Pages, Components, services, and models, the user needs to run **npm install** on **GreatPizzaWebApp** folder, a proxy file was created for API integration, proxy.config.json, and package.json was updated in order to use that file, the project needs to be started with **npm start**, this will start the server on [http://localhost:4200/](http://localhost:4200/).
