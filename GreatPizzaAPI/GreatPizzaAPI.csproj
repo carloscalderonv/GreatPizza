@@ -19,9 +19,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Contracts\V1\Responses\" />
+    <ProjectReference Include="..\GreatPizza.Contracts\GreatPizza.Contracts.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
-
 </Project>
