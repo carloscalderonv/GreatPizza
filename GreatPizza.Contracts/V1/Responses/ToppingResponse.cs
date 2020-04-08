@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GreatPizza.Contracts.V1.Responses
 {
-    class ToppingResponse
+    public class ToppingResponse
     {
         public Guid Id { get; set; }
 

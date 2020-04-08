@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
-using GreatPizzaAPI.Contracts;
-using GreatPizzaAPI.Contracts.V1.Requests;
+using GreatPizza.Contracts;
+using GreatPizza.Contracts.V1.Requests;
 using GreatPizzaAPI.Domains;
 using Xunit;
 
