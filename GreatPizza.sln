@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreatPizza.Contracts", "Gre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreatPizza.SDK", "GreatPizza.SDK\GreatPizza.SDK.csproj", "{B9F3731D-CEE8-4C16-9114-96F569892498}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreatPizza.SDK.Sample", "GreatPizza.SDK.Sample\GreatPizza.SDK.Sample.csproj", "{D068360E-7488-4E2D-9FAD-BB0911614B07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
