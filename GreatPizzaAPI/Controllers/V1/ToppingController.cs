@@ -12,6 +12,7 @@ namespace GreatPizzaAPI.Controllers.V1
     public class ToppingController : Controller
     {
         private readonly IToppingService _toppingService;
+
         private readonly IUriService _uriService;
 
         public ToppingController(IToppingService toppingService, IUriService uriService)
@@ -25,14 +26,13 @@ namespace GreatPizzaAPI.Controllers.V1
         {
             return Ok(await _toppingService.GetAllAsync());
         }
+        
         [HttpGet(ApiRoutes.Topping.Get)]
         public async Task<IActionResult> Get([FromRoute]Guid toppingId)
         {
             var topping = await _toppingService.GetByIdAsync(toppingId);
-
             if (topping == null)
                 return NotFound();
-
             return Ok(topping);
         }
 
@@ -45,9 +45,7 @@ namespace GreatPizzaAPI.Controllers.V1
                 Id = newToppingId,
                 Name = createToppingRequest.Name
             };
-
             await _toppingService.CreateAsync(topping);
-
             var locationUri = _uriService.GetToppingUri(topping.Id.ToString());
             return Created(locationUri, topping);
         }
@@ -57,12 +55,9 @@ namespace GreatPizzaAPI.Controllers.V1
         {
             var topping = await _toppingService.GetByIdAsync(toppingId);
             topping.Name = request.Name;
-
             var updated = await _toppingService.UpdateAsync(topping);
-
             if (updated)
                 return Ok(topping);
-
             return NotFound();
         }
 
@@ -70,10 +65,8 @@ namespace GreatPizzaAPI.Controllers.V1
         public async Task<IActionResult> Delete([FromRoute] Guid toppingId)
         {
             var deleted = await _toppingService.DeleteAsync(toppingId);
-
             if (deleted)
                 return NoContent();
-
             return NotFound();
         }
 

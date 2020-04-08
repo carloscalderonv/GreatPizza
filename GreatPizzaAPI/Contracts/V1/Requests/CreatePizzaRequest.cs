@@ -8,6 +8,7 @@ namespace GreatPizzaAPI.Contracts.V1.Requests
     public class CreatePizzaRequest
     {
         public string Name { get; set; }
+        
         public string Description { get; set; }
     }
 }

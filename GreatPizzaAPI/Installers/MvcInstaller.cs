@@ -12,7 +12,6 @@ namespace GreatPizzaAPI.Installers
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-
             services.AddSingleton<IUriService>(provider =>
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();

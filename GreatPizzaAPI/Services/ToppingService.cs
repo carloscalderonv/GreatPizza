@@ -12,6 +12,7 @@ namespace GreatPizzaAPI.Services
     public class ToppingService : IToppingService
     {
         private readonly DataContext _dataContext;
+        
         ILogger _logger;
 
         public ToppingService(DataContext dataContext, ILoggerFactory loggerFactory)
@@ -19,6 +20,7 @@ namespace GreatPizzaAPI.Services
             _logger = loggerFactory.CreateLogger<PizzaService>();
             _dataContext = dataContext;
         }
+        
         public async Task<bool> CreateAsync(Topping topping)
         {
             try
@@ -39,10 +41,8 @@ namespace GreatPizzaAPI.Services
             try
             {
                 var topping = await GetByIdAsync(toppingId);
-
                 if (topping == null)
                     return false;
-
                 _dataContext.Topping.Remove(topping);
                 var deleted = await _dataContext.SaveChangesAsync();
                 return deleted > 0;
@@ -72,9 +72,7 @@ namespace GreatPizzaAPI.Services
             try
             {
                 var toppingsIds = _dataContext.ToppingPizza.Where(p => p.PizzaId == pizzaId).Select(tp => tp.ToppingId).ToArray();
-
                 var query = _dataContext.Topping.Where(p => !toppingsIds.Contains(p.Id));
-            
                 return await query.ToListAsync();
             }
             catch (Exception ex)
